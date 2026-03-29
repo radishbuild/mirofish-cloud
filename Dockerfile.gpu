@@ -1,0 +1,59 @@
+# MiroFish Private Cloud — GPU image with Ollama + Neo4j
+# Pulls MiroFish source from GitHub at build time. No fork needed.
+
+# Stage 1: Clone source + build Vue frontend
+FROM node:24-alpine AS source
+WORKDIR /app
+RUN apk add --no-cache git
+RUN git clone --depth 1 https://github.com/nikmcfly/MiroFish-Offline.git .
+WORKDIR /app/frontend
+RUN npm ci
+# Patch the API client to use relative URLs (same origin) instead of localhost:5001.
+# The frontend runs in the user's browser, so localhost doesn't reach the pod.
+RUN sed -i "s|http://localhost:5001||g" src/api/index.js
+RUN npm run build
+
+# Stage 2: Python backend + Ollama + Neo4j + built frontend
+FROM python:3.11-slim
+WORKDIR /app
+
+# Install system deps + Java (required by Neo4j)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      nginx curl wget gnupg2 zstd openjdk-21-jre-headless && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Neo4j Community (2026.02 — latest stable)
+RUN mkdir -p /etc/apt/keyrings && \
+    wget -O - https://debian.neo4j.com/neotechnology.gpg.key | gpg --dearmor -o /etc/apt/keyrings/neotechnology.gpg && \
+    chmod a+r /etc/apt/keyrings/neotechnology.gpg && \
+    echo 'deb [signed-by=/etc/apt/keyrings/neotechnology.gpg] https://debian.neo4j.com stable latest' > /etc/apt/sources.list.d/neo4j.list && \
+    apt-get update && \
+    apt-get install -y neo4j=1:2026.02.* && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Ollama
+RUN curl -fsSL https://ollama.com/install.sh | sh
+
+# Copy backend from stage 1
+COPY --from=source /app/backend /app/backend
+
+# Install backend Python deps
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt
+
+# Copy built frontend from stage 1
+COPY --from=source /app/frontend/dist /app/frontend/dist
+
+# Nginx config + startup script
+COPY nginx.gpu.conf /etc/nginx/nginx.conf
+COPY start-gpu.sh /start-gpu.sh
+RUN chmod +x /start-gpu.sh
+
+# Sensible defaults — all overridden by provider env vars at runtime
+ENV FLASK_HOST=0.0.0.0
+ENV FLASK_PORT=5001
+ENV FLASK_DEBUG=False
+
+EXPOSE 3000
+
+CMD ["/start-gpu.sh"]
