@@ -396,7 +396,7 @@ export default async function Landing() {
             </div>
           </div>
           <a
-            href="https://github.com/nikmcfly/MiroFish-Offline"
+            href="https://github.com/radishbuild/mirofish-cloud"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-emerald-400 transition-colors"
@@ -427,7 +427,7 @@ export default async function Landing() {
               Sign up
             </Link>
             <a
-              href="https://github.com/nikmcfly/MiroFish-Offline"
+              href="https://github.com/radishbuild/mirofish-cloud"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-zinc-300 transition-colors"
