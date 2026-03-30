@@ -1,5 +1,1 @@
-{
-  "crons": [
-    { "path": "/api/cron/poll-status", "schedule": "* * * * *" }
-  ]
-}
+{}
