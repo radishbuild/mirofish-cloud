@@ -86,14 +86,24 @@ export function InlineCredentialForm({
       ))}
 
       <div className="flex items-center justify-between">
-        <a
-          href={config.helpUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 transition-colors rounded"
-        >
-          Get key <ExternalLink className="h-3 w-3" aria-hidden="true" />
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href={config.signupUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 transition-colors rounded"
+          >
+            Sign up <ExternalLink className="h-3 w-3" aria-hidden="true" />
+          </a>
+          <a
+            href={config.helpUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-300 transition-colors rounded"
+          >
+            Get key <ExternalLink className="h-3 w-3" aria-hidden="true" />
+          </a>
+        </div>
 
         <button
           onClick={handleConnect}

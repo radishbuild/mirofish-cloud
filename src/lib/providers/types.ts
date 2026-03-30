@@ -33,15 +33,18 @@ export const PROVIDER_CREDENTIAL_FIELDS: Record<
   {
     fields: { key: keyof ProviderCredentials; label: string }[];
     helpUrl: string;
+    signupUrl: string;
   }
 > = {
   runpod: {
     fields: [{ key: "apiKey", label: "API Key" }],
     helpUrl: "https://www.console.runpod.io/user/settings",
+    signupUrl: "https://runpod.io?ref=zac52ha1",
   },
   vastai: {
     fields: [{ key: "apiKey", label: "API Key" }],
     helpUrl: "https://cloud.vast.ai/manage-keys/",
+    signupUrl: "https://cloud.vast.ai/?ref_id=456186",
   },
 };
 
