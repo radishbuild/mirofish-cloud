@@ -41,8 +41,13 @@ const steps = [
 ];
 
 export default async function Landing() {
-  const session = await auth.api.getSession({ headers: await headers() });
-  const loggedIn = !!session;
+  let loggedIn = false;
+  try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    loggedIn = !!session;
+  } catch {
+    // Auth not available (DB not set up yet) — show logged-out state
+  }
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">

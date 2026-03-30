@@ -19,6 +19,6 @@ export function proxy(req: NextRequest) {
   return NextResponse.next();
 }
 
-export const proxyConfig = {
+export const config = {
   matcher: ["/dashboard/:path*", "/api/((?!auth|cron|health).*)"],
 };
