@@ -34,7 +34,7 @@ export class RunPodProvider implements DeployProvider {
   }
 
   async validateCredentials(): Promise<boolean> {
-    const data = await this.gql(`{ myself { id apiKey { permissions } } }`);
+    const data = await this.gql(`{ myself { id } }`);
     if (!data?.myself?.id)
       throw new Error("Invalid RunPod API key — could not authenticate.");
     return true;
