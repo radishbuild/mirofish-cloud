@@ -10,9 +10,9 @@ MiroFish Cloud is a hosted control plane that deploys dedicated GPU instances ru
 
 | Component | Location | User data? |
 |-----------|----------|------------|
-| Landing page, auth, dashboard | Vercel | Email only |
-| Instance registry | Neon Postgres | URLs + status only |
-| Provider credentials | Neon Postgres | AES-256-GCM encrypted |
+| Landing page, auth, dashboard | Vercel | Email address for login |
+| Instance registry | Neon Postgres | URLs + status |
+| Provider API keys | Neon Postgres | AES-256-GCM encrypted, decrypted only server-side |
 | MiroFish app + simulation data | User's GPU pod | **All user data stays here** |
 | Neo4j knowledge graph | User's GPU pod | **Never leaves the pod** |
 | Ollama LLM | User's GPU pod | **Zero external calls** |
@@ -27,7 +27,8 @@ MiroFish Cloud is a hosted control plane that deploys dedicated GPU instances ru
 | Email | Resend |
 | Styling | Tailwind CSS 4.2 |
 | Icons | Lucide React |
-| GPU Providers | RunPod, Vast.ai |
+| Analytics | Vercel Web Analytics + Speed Insights |
+| GPU Providers | RunPod (Secure Cloud), Vast.ai (Datacenter) |
 | Container | Python 3.11 + Neo4j 2026.02 + Ollama + nginx |
 
 ## Local Development
@@ -222,6 +223,7 @@ graph TB
 │       ├── crypto.ts                     # AES-256-GCM encryption
 │       ├── db/schema.ts                  # Drizzle schema
 │       └── providers/                    # RunPod + Vast.ai integrations
+├── src/proxy.ts                          # Auth guard (Next.js 16 proxy)
 ├── Dockerfile.gpu                        # MiroFish container image
 ├── nginx.gpu.conf                        # nginx config for container
 ├── start-gpu.sh                          # Container startup script

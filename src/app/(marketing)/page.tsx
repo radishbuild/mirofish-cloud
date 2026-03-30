@@ -24,7 +24,7 @@ const steps = [
     icon: Server,
     num: "02",
     title: "Deploy in 90s",
-    desc: "Dedicated instance, provisioned for you.",
+    desc: "Your own GPU server — nothing shared, fully yours.",
   },
   {
     icon: Globe,
@@ -82,7 +82,7 @@ export default async function Landing() {
             Privacy-first by design
           </div>
 
-          <h1 className="text-6xl font-bold leading-tight tracking-tighter md:text-8xl font-display">
+          <h1 className="text-6xl font-bold leading-tight md:text-8xl font-display">
             Simulate social media
             <br />
             <span className="bg-gradient-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent">
@@ -295,115 +295,85 @@ export default async function Landing() {
         </div>
       </section>
 
-      {/* Private Cloud */}
+      {/* Private Cloud + Privacy — combined */}
       <section
         className="max-w-5xl mx-auto px-6 pb-28 motion-safe:animate-fade-up"
         style={{ animationDelay: "0.4s" }}
       >
-        <div className="text-center mb-14">
-          <h2 className="text-3xl font-bold md:text-4xl font-display">
-            Your own private cloud
-          </h2>
-          <p className="mt-3 text-muted max-w-2xl mx-auto">
-            Every instance is a dedicated GPU server running Ollama. Your
-            documents, prompts, and results never leave your server. Zero
-            external API calls.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            {
-              icon: Cpu,
-              title: "GPU-powered",
-              desc: "Dedicated GPU for fast inference. RTX 4090, A100, H100, and more.",
-            },
-            {
-              icon: Server,
-              title: "Ollama built-in",
-              desc: "Run Qwen, Llama, and other open models. No external LLM calls.",
-            },
-            {
-              icon: Database,
-              title: "Neo4j knowledge graph",
-              desc: "Agents build and traverse social graphs in a dedicated database.",
-            },
-            {
-              icon: Lock,
-              title: "Zero external calls",
-              desc: "Everything runs on your server. No data leaves your instance.",
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition-all duration-300 hover:border-emerald-500/30 hover:bg-zinc-900 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/5"
-            >
-              <div className="h-10 w-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4">
-                <item.icon
-                  className="h-5 w-5 text-emerald-400"
-                  aria-hidden="true"
-                />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Privacy */}
-      <section
-        className="max-w-3xl mx-auto px-6 pb-28 motion-safe:animate-fade-up"
-        style={{ animationDelay: "0.5s" }}
-      >
-        <div className="relative rounded-2xl border border-emerald-500/20 bg-zinc-900/50 p-10 md:p-14 text-center overflow-hidden">
+        <div className="relative rounded-2xl border border-emerald-500/20 bg-zinc-900/50 p-10 md:p-14 overflow-hidden">
           <div
             className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent pointer-events-none"
             aria-hidden="true"
           />
-          <Shield
-            className="relative h-16 w-16 text-emerald-500/40 mx-auto mb-6 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-            aria-hidden="true"
-          />
-          <h2 className="relative text-3xl font-bold mb-4 font-display">
-            Your data stays yours
-          </h2>
-          <p className="relative text-zinc-400 max-w-lg mx-auto mb-8">
-            Our database stores your email and instance status. That&apos;s it.
-            Documents, API keys, simulation results, and prompts never leave
-            your instance.
-          </p>
-          <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-8 text-left">
-            <div className="rounded-xl bg-zinc-800/50 border border-zinc-800 p-4">
-              <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
-                We store
-              </p>
-              <ul className="space-y-1 text-sm text-zinc-400">
-                <li>Email</li>
-                <li>Instance status</li>
-              </ul>
-            </div>
-            <div className="rounded-xl bg-zinc-800/50 border border-zinc-800 p-4">
-              <p className="text-xs font-semibold text-emerald-500 uppercase tracking-wider mb-2">
-                We never see
-              </p>
-              <ul className="space-y-1 text-sm text-zinc-400">
-                <li>Your documents</li>
-                <li>API keys</li>
-                <li>Sim results</li>
-              </ul>
-            </div>
+          <div className="relative text-center mb-10">
+            <Shield
+              className="h-12 w-12 text-emerald-500/40 mx-auto mb-4 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+              aria-hidden="true"
+            />
+            <h2 className="text-3xl font-bold md:text-4xl font-display mb-3">
+              Your own private cloud
+            </h2>
+            <p className="text-zinc-400 max-w-xl mx-auto">
+              Every instance is a dedicated GPU server. Your documents, prompts,
+              and results never leave it.
+            </p>
           </div>
-          <a
-            href="https://github.com/radishbuild/mirofish-cloud"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-emerald-400 transition-colors"
-          >
-            <ExternalLink className="h-4 w-4" />
-            Open source (AGPL-3.0) — audit every line
-          </a>
+
+          <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              {
+                icon: Cpu,
+                title: "Dedicated GPU",
+                desc: "Your own server with full GPU access. Not shared with anyone.",
+              },
+              {
+                icon: Server,
+                title: "Local LLM",
+                desc: "Ollama runs on your instance. Prompts never leave the server.",
+              },
+              {
+                icon: Database,
+                title: "Private knowledge graph",
+                desc: "Neo4j stores agents and relationships entirely on your server.",
+              },
+              {
+                icon: Lock,
+                title: "Zero external calls",
+                desc: "No data sent anywhere. Everything runs inside your instance.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-xl border border-zinc-800/50 bg-zinc-800/30 p-5 transition-all duration-300 hover:border-emerald-500/20 hover:-translate-y-1"
+              >
+                <item.icon
+                  className="h-5 w-5 text-emerald-400 mb-3"
+                  aria-hidden="true"
+                />
+                <h3 className="font-semibold mb-1">{item.title}</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="relative text-sm text-zinc-500 text-center mb-4">
+            We store your email address for login and your GPU provider API keys
+            (AES-256 encrypted) to deploy instances — nothing else.
+          </p>
+
+          <div className="relative text-center">
+            <a
+              href="https://github.com/radishbuild/mirofish-cloud"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-emerald-400 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Open source (AGPL-3.0) — audit every line
+            </a>
+          </div>
         </div>
       </section>
 
@@ -419,12 +389,6 @@ export default async function Landing() {
               className="hover:text-zinc-300 transition-colors"
             >
               Log in
-            </Link>
-            <Link
-              href="/login"
-              className="hover:text-zinc-300 transition-colors"
-            >
-              Sign up
             </Link>
             <a
               href="https://github.com/radishbuild/mirofish-cloud"

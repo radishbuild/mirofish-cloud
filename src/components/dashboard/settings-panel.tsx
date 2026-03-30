@@ -73,8 +73,9 @@ export function SettingsPanel({
         Provider credentials
       </h2>
       <p className="text-sm text-zinc-400 mb-6">
-        Connect your cloud provider accounts to deploy instances. API keys are
-        encrypted at rest.
+        Your GPU provider API keys. AES-256 encrypted and only decrypted
+        server-side to provision and manage your instances. Connect providers
+        when creating a new instance.
       </p>
 
       <div className="space-y-2">
