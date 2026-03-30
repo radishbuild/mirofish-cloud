@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Instrument_Serif, DM_Sans } from "next/font/google";
+import { JetBrains_Mono, Playfair_Display, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const display = Instrument_Serif({
+const display = Playfair_Display({
   subsets: ["latin"],
-  weight: "400",
   variable: "--font-display",
   display: "swap",
 });

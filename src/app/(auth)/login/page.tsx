@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { Shield, Lock, Eye, AlertCircle, Mail, Check } from "lucide-react";
@@ -72,12 +73,12 @@ export default function LoginPage() {
               {
                 icon: Shield,
                 title: "Data stays on your instance",
-                desc: "Documents, API keys, and results never leave your server.",
+                desc: "Documents, prompts, and simulation results never leave your server.",
               },
               {
                 icon: Lock,
                 title: "Encrypted credentials",
-                desc: "Provider keys encrypted at rest with AES-256-GCM.",
+                desc: "Provider API keys AES-256 encrypted, decrypted only server-side.",
               },
               {
                 icon: Eye,
@@ -104,7 +105,7 @@ export default function LoginPage() {
         {/* Right — form */}
         <div className="flex-1 flex items-center justify-center px-6">
           <div className="w-full max-w-sm">
-            <h1 className="text-3xl font-bold mb-8 font-display">
+            <h1 className="text-3xl font-bold mb-8 font-display text-center">
               Log in to MiroFish
             </h1>
 
@@ -143,12 +144,26 @@ export default function LoginPage() {
                     onClick={() => handleOAuth("github")}
                     className="min-h-11 w-full flex items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 py-3 text-sm font-medium transition-all duration-200 hover:border-zinc-600 hover:bg-zinc-800 focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
+                    <Image
+                      src="/icons/github.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                      aria-hidden="true"
+                    />
                     Continue with GitHub
                   </button>
                   <button
                     onClick={() => handleOAuth("google")}
                     className="min-h-11 w-full flex items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 py-3 text-sm font-medium transition-all duration-200 hover:border-zinc-600 hover:bg-zinc-800 focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
+                    <Image
+                      src="/icons/google.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                      aria-hidden="true"
+                    />
                     Continue with Google
                   </button>
                 </div>

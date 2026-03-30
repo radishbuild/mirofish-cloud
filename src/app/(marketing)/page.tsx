@@ -82,7 +82,7 @@ export default async function Landing() {
             Privacy-first by design
           </div>
 
-          <h1 className="text-6xl font-bold leading-tight md:text-8xl font-display">
+          <h1 className="text-5xl font-bold leading-tight md:text-6xl font-display">
             Simulate social media
             <br />
             <span className="bg-gradient-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent">
